@@ -7,3 +7,8 @@ export const login = (data) => {
     method: "GET",
   });
 };
+export const getUserInfo = () => {
+  return request({
+    url: 'http://47.119.148.251:3000/testMsg',
+  })
+}

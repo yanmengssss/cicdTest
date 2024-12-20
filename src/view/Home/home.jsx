@@ -1,11 +1,20 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
-const Login = () => {
+import { useEffect } from 'react';
+import io from 'socket.io-client';
+import { getUserInfo } from '../../apis/api';
+const Home = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getUserInfo().then(res => {
+      console.log(res)
+    })
+  }, []);
+
   return (
     <Button type="primary" onClick={() => navigate('/login')}>首页</Button>
   );
 }
 
-export default Login;
+export default Home;
