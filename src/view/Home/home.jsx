@@ -8,7 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     getUserInfo().then(res => {
-      console.log(res)
+      console.log(res,111)
     })
   }, []);
 
