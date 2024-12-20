@@ -32,6 +32,7 @@ jobs:
           ssh-keyscan ${{ secrets.ECS_HOST }} >> ~/.ssh/known_hosts
 
       - name: 部署到 ECS
+        if: success() # 只有构建步骤成功时才会执行
         env:
           HOST: ${{ secrets.ECS_HOST }}
           USER: ${{ secrets.ECS_USER }}
