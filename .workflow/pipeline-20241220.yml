@@ -8,26 +8,26 @@ triggers:
       precise:
         - master
 stages:
-  - name: stage-8c03bfa2
+  - name: stage-29b7fe1d
     displayName: 未命名
     strategy: naturally
     trigger: auto
     executor: []
     steps:
-      - step: ut@nodejs
-        name: unit_test_nodejs
-        displayName: Nodejs 单元测试
-        nodeVersion: 16.14.2
+      - step: build@nodejs
+        name: build_nodejs
+        displayName: Nodejs 构建
+        nodeVersion: 14.16.0
         commands:
           - '# 设置NPM源，提升安装速度'
           - npm config set registry https://registry.npmmirror.com
-          - '# 在这里输入测试命令'
-          - npm install && npm run test
-        report:
-          path: mochawesome-report
-          file: mochawesome.json
-          index: mochawesome.html
-        checkpoints: []
+          - ''
+          - '# 执行编译命令'
+          - npm install && npm run build
+        artifacts:
+          - name: BUILD_ARTIFACT
+            path:
+              - ./dist
         caches:
           - ~/.npm
           - ~/.yarn
