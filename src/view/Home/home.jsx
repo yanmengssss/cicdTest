@@ -13,7 +13,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Button type="primary" onClick={() => navigate('/login')}>首页测试CICDe...</Button>
+    <Button type="primary" onClick={() => navigate('/login')}>首页测试CICDe...ewqeqweqweqwe</Button>
   );
 }
 
