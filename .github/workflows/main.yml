@@ -1,0 +1,40 @@
+name: Deploy React App to ECS
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # 根据项目需要调整
+
+      - name: 安装 pnpm
+        run: npm install -g pnpm
+
+      - name: 安装依赖
+        run: pnpm install
+
+      - name: 构建项目
+        run: pnpm run build
+
+      - name: 部署到 ECS
+        env:
+          HOST: ${{ secrets.ECS_HOST }}
+          USER: ${{ secrets.ECS_USER }}
+          KEY: ${{ secrets.ECS_PRIVATE_KEY }}
+          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
+        run: |
+          echo "$KEY" > deploy_key.pem
+          chmod 600 deploy_key.pem
+          ssh -i deploy_key.pem $USER@$HOST "rm -rf $REMOTE_DIR/*"
+          scp -i deploy_key.pem -r ./build/* $USER@$HOST:$REMOTE_DIR
+          ssh -i deploy_key.pem $USER@$HOST "cd $REMOTE_DIR && pm2 restart all"
