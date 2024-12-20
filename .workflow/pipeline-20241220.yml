@@ -1,0 +1,34 @@
+version: '1.0'
+name: pipeline-20241220
+displayName: pipeline-20241220
+triggers:
+  trigger: auto
+  push:
+    branches:
+      precise:
+        - master
+stages:
+  - name: stage-94918b92
+    displayName: CI
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: ut@nodejs
+        name: unit_test_nodejs
+        displayName: 下载pnpm
+        nodeVersion: 14.16.0
+        commands:
+          - 'npm install pnpm '
+          - pnpm install
+        report:
+          path: mochawesome-report
+          file: mochawesome.json
+          index: mochawesome.html
+        checkpoints: []
+        caches:
+          - ~/.npm
+          - ~/.yarn
+        notify: []
+        strategy:
+          retry: '0'
