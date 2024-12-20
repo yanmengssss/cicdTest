@@ -37,9 +37,9 @@ jobs:
           USER: ${{ secrets.ECS_USER }}
           KEY: ${{ secrets.ECS_PRIVATE_KEY }}
           REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
-         run: |
+        run: |
           echo "$KEY" > deploy_key.pem
           chmod 600 deploy_key.pem
-          ssh -o StrictHostKeyChecking=no -i deploy_key.pem $USER@$HOST "rm -rf $REMOTE_DIR/*"
-          scp -o StrictHostKeyChecking=no -i deploy_key.pem -r ./dist/* $USER@$HOST:$REMOTE_DIR
-          ssh -o StrictHostKeyChecking=no -i deploy_key.pem $USER@$HOST "cd $REMOTE_DIR && pm2 restart all"
+          ssh -i deploy_key.pem $USER@$HOST "rm -rf $REMOTE_DIR/*"
+          scp -i deploy_key.pem -r ./dist/* $USER@$HOST:$REMOTE_DIR
+          ssh -i deploy_key.pem $USER@$HOST "cd $REMOTE_DIR && pm2 restart all"
