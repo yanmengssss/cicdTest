@@ -50,10 +50,10 @@ stages:
         deployArtifact:
           - source: build
             name: output
-            target: ~/gitee_go/deploy
+            target: /giteeCDtest
             dependArtifact: BUILD_ARTIFACT
         script:
-          - cd ~/gitee_go/deploy
+          - cd /giteeCDtest
           - ls
           - tar -zxf output.tar.gz
           - echo 'Hello Gitee Go!'
