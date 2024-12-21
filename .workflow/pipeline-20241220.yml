@@ -28,9 +28,7 @@ stages:
           file: mochawesome.json
           index: mochawesome.html
         checkpoints: []
-        caches:
-          - ~/.npm
-          - ~/.yarn
+        caches: [] # 移除缓存功能，确保每次都是全新环境
         notify: []
         strategy:
           retry: '0'
