@@ -27,8 +27,7 @@ stages:
             path:
               - ./dist
         caches:
-          - ~/.npm
-          - ~/.yarn
+          - ~/.pnpm
         notify: []
         strategy:
           retry: '0'
