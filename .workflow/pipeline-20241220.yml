@@ -21,14 +21,17 @@ stages:
         commands:
           - npm config set registry https://registry.npmmirror.com
           - npm install pnpm
+          - pnpm -v
           - pnpm install
           - pnpm run build
+          - npm install
+          - npm run buld
         report:
           path: mochawesome-report
           file: mochawesome.json
           index: mochawesome.html
         checkpoints: []
-        caches: [] # 移除缓存功能，确保每次都是全新环境
+        caches: []
         notify: []
         strategy:
           retry: '0'
