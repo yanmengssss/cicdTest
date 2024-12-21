@@ -53,7 +53,6 @@ stages:
             target: ~/gitee_go/deploy
             dependArtifact: BUILD_ARTIFACT
         script:
-          - '|'
           - cd ~/gitee_go/deoloy
           - ls
           - tar -zxf output.tar.gz
